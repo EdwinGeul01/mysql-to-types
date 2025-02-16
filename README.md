@@ -1,6 +1,6 @@
 # Mysql to Typescript interfaces
 
-![alt](banner.png)
+![alt](https://raw.githubusercontent.com/EdwinGeul01/mysql-to-types/refs/heads/main/banner.png)
 
 Lib to help conver a mysql schema to typescript interfaces
 
@@ -12,7 +12,7 @@ $ npm install mysql-to-types
 
 ## how to use it
 
-- create a file called conection-sql-ts.json in the root of the project with the following content
+- create a file called `conection-sql-ts.json` in the root of the project with the following content
 
 ```json
 {
