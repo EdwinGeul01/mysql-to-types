@@ -1,0 +1,27 @@
+{
+  "name": "database-to-types",
+  "version": "1.0.0",
+  "description": "create a ts interfaces from a db schema",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx ./bin/main.ts",
+    "build": "tsc",
+    "db-to-ts": "node ./bin/src/main.js"
+  },
+  "bin": {
+    "sync-db": "./bin/src/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.10.2",
+    "dotenv": "^16.4.7",
+    "mysql2": "^3.11.5",
+    "tsx": "^4.19.2"
+  },
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

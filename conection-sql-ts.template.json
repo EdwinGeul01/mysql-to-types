@@ -1,0 +1,12 @@
+{
+  "host": "localhost",
+  "user": "user",
+  "password": "1234",
+  "database": "db",
+  "port":3306, 
+  "options": {
+    "prefix": "DB_",
+    "path": "./DB_new.d.ts"
+  }
+}
+
