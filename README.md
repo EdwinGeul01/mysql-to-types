@@ -1,5 +1,7 @@
 # Mysql to Typescript interfaces
 
+![alt](banner.png)
+
 Lib to help conver a mysql schema to typescript interfaces
 
 ## Installation
