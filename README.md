@@ -7,7 +7,7 @@ Lib to help conver a mysql schema to typescript interfaces
 ## Installation
 
 ```bash
-$ npm install mysql-to-types
+$ npm i database-to-types
 ```
 
 ## how to use it
