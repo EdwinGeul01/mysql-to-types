@@ -3,6 +3,19 @@
   "version": "1.0.6",
   "description": "create a ts interfaces from a db schema",
   "main": "main.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdwinGeul01/mysql-to-types"
+  },
+  "keywords": [
+    "typescript",
+    "mysql",
+    "database",
+    "types",
+    "ts",
+    "interface",
+    "generator"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsx ./bin/main.ts",
