@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import "dotenv/config";
 import * as fs from "fs/promises";
 import { table } from "../_interface/table.interface";
