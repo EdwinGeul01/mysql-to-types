@@ -1,8 +1,10 @@
 import * as mysql2 from "mysql2/promise";
 import * as fs from "fs";
+import { getConnectionSettings } from "./connection-settings";
 
 //read the connection settings from a json file
-const settings = JSON.parse(fs.readFileSync("conection-sql-ts.json", "utf-8"));
+const settings = getConnectionSettings();
+//JSON.parse(fs.readFileSync("conection-sql-ts.json", "utf-8"));
 
 //validate if the file exists
 if (!settings) {
@@ -15,7 +17,7 @@ export const pool = mysql2.createPool({
   user: settings?.user ?? "root",
   database: settings?.database ?? "test",
   password: settings?.password ?? "root",
-  port: parseInt(settings?.port ?? "3306"),
+  port: settings?.port ?? 3306,
   waitForConnections: true,
   connectionLimit: 10,
   maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`

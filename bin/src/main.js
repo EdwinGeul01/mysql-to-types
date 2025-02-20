@@ -1,38 +1,4 @@
-#!/usr/bin/env node
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -52,20 +18,22 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settings = void 0;
 require("dotenv/config");
-const fs = __importStar(require("fs"));
 const get_tables_1 = require("../querys/get-tables");
 const get_columns_descriptions_1 = require("../querys/get-columns-descriptions");
 const connection_1 = require("../connection/connection");
 const create_interface_file_1 = require("./create-interface-file");
-//read the connection settings from a json file
-exports.settings = JSON.parse(fs.readFileSync("conection-sql-ts.json", "utf-8"));
-//validate if the file exists
-if (!exports.settings) {
-    throw new Error("Settings file not found, please create it.");
+const connection_settings_1 = require("../connection/connection-settings");
+function readSettings() {
+    return __awaiter(this, void 0, void 0, function* () {
+        //validate if the file exists
+        exports.settings = yield (0, connection_settings_1.getConnectionSettings)();
+        // JSON.parse(await fs.readFile("conection-sql-ts.json", "utf-8"));
+    });
 }
 function getData() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, e_1, _b, _c;
+        yield readSettings();
         //get the connection from the pool
         const con = yield connection_1.connection.getConnection();
         // get all the tables schemas

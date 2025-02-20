@@ -36,9 +36,10 @@ var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pool = void 0;
 const mysql2 = __importStar(require("mysql2/promise"));
-const fs = __importStar(require("fs"));
+const connection_settings_1 = require("./connection-settings");
 //read the connection settings from a json file
-const settings = JSON.parse(fs.readFileSync("conection-sql-ts.json", "utf-8"));
+const settings = (0, connection_settings_1.getConnectionSettings)();
+//JSON.parse(fs.readFileSync("conection-sql-ts.json", "utf-8"));
 //validate if the file exists
 if (!settings) {
     throw new Error("Settings file not found, please create it.");
@@ -49,7 +50,7 @@ exports.pool = mysql2.createPool({
     user: (_b = settings === null || settings === void 0 ? void 0 : settings.user) !== null && _b !== void 0 ? _b : "root",
     database: (_c = settings === null || settings === void 0 ? void 0 : settings.database) !== null && _c !== void 0 ? _c : "test",
     password: (_d = settings === null || settings === void 0 ? void 0 : settings.password) !== null && _d !== void 0 ? _d : "root",
-    port: parseInt((_e = settings === null || settings === void 0 ? void 0 : settings.port) !== null && _e !== void 0 ? _e : "3306"),
+    port: (_e = settings === null || settings === void 0 ? void 0 : settings.port) !== null && _e !== void 0 ? _e : 3306,
     waitForConnections: true,
     connectionLimit: 10,
     maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`

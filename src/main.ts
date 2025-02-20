@@ -1,25 +1,26 @@
-#!/usr/bin/env node
-
 import "dotenv/config";
-import * as fs from "fs";
+import * as fs from "fs/promises";
 import { table } from "../_interface/table.interface";
 import { column } from "../_interface/column.interface";
 import { queryToGetTables } from "../querys/get-tables";
 import { queryToGetColumnDescription } from "../querys/get-columns-descriptions";
 import { connection } from "../connection/connection";
 import { createInterfaceFile } from "./create-interface-file";
+import { getConnectionSettings } from "../connection/connection-settings";
 
 //read the connection settings from a json file
-export const settings = JSON.parse(
-  fs.readFileSync("conection-sql-ts.json", "utf-8")
-);
 
-//validate if the file exists
-if (!settings) {
-  throw new Error("Settings file not found, please create it.");
+export let settings: any;
+
+async function readSettings() {
+  //validate if the file exists
+  settings = await getConnectionSettings();
+  // JSON.parse(await fs.readFile("conection-sql-ts.json", "utf-8"));
 }
 
 async function getData() {
+  await readSettings();
+
   //get the connection from the pool
   const con = await connection.getConnection();
 
