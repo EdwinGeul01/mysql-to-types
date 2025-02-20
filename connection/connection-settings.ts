@@ -8,6 +8,10 @@ interface connectionSettings {
   host?: string;
   port?: number;
   database?: string;
+  options?: {
+    prefix?: string;
+    path?: string;
+  };
 }
 
 export function getConnectionSettings(): connectionSettings {
@@ -105,9 +109,16 @@ export function getConnectionSettings(): connectionSettings {
 
     connectionSettings.database = database;
 
+    connectionSettings.options = {};
     //search if the args have -f
     let pathIndex = args.findIndex((arg) => arg == "-f");
     let path = pathIndex == -1 ? "./interfaces.d.ts" : args[pathIndex + 1];
+    connectionSettings.options.path = path;
+
+    //search if the args have -p
+    let prefixIndex = args.findIndex((arg) => arg == "-p");
+    let prefix = prefixIndex == -1 ? "" : args[prefixIndex + 1];
+    connectionSettings.options.prefix = prefix;
   }
 
   return connectionSettings;

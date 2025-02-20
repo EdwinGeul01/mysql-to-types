@@ -25,7 +25,7 @@ export async function createInterfaceFile(tables: table[]) {
   }
 
   //write the file
-  fs.writeFileSync(settings.options?.path ?? "./DB.d.ts", fstring);
+  fs.writeFileSync(settings.options?.path ?? "./interfaces.d.ts", fstring);
 
   fs.closeSync(0);
 }

@@ -113,9 +113,15 @@ function getConnectionSettings() {
         //remove the part of the port from the string
         let database = UriWithoutHost.slice(portIndex + 1);
         connectionSettings.database = database;
+        connectionSettings.options = {};
         //search if the args have -f
         let pathIndex = args.findIndex((arg) => arg == "-f");
         let path = pathIndex == -1 ? "./interfaces.d.ts" : args[pathIndex + 1];
+        connectionSettings.options.path = path;
+        //search if the args have -p
+        let prefixIndex = args.findIndex((arg) => arg == "-p");
+        let prefix = prefixIndex == -1 ? "" : args[prefixIndex + 1];
+        connectionSettings.options.prefix = prefix;
     }
     return connectionSettings;
 }

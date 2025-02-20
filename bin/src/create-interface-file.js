@@ -64,7 +64,7 @@ function createInterfaceFile(tables) {
             fstring += "}\n\n";
         }
         //write the file
-        fs.writeFileSync((_d = (_c = main_1.settings.options) === null || _c === void 0 ? void 0 : _c.path) !== null && _d !== void 0 ? _d : "./DB.d.ts", fstring);
+        fs.writeFileSync((_d = (_c = main_1.settings.options) === null || _c === void 0 ? void 0 : _c.path) !== null && _d !== void 0 ? _d : "./interfaces.d.ts", fstring);
         fs.closeSync(0);
     });
 }

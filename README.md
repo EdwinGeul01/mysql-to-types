@@ -41,3 +41,36 @@ $ npm i database-to-types
 ```bash
 $ npm run sync-db
 ```
+
+## Globally use
+
+- install the package globally
+
+```bash
+$ npm i -g database-to-types
+```
+
+- run the following command
+
+- replace the names of the database, user, password, host and port with the ones of your database
+
+```bash
+$ npx sync-db -s mysql://username:password@host:port/database
+```
+
+### For example
+
+```bash
+$ npx sync-db -s mysql://user123:password123@localhost:3306/database123
+```
+
+### options args
+
+| option | description                | default           |
+| ------ | -------------------------- | ----------------- |
+| -s     | database config            | none              |
+| -f     | path to the interface file | ./interfaces.d.ts |
+| -p     | prefix of the interface    | none              |
+
+
+If it helps you, you can give me a star on [GitHub](https://github.com/EdwinGeul01/mysql-to-types) 😀
