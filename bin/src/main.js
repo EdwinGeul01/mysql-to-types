@@ -38,7 +38,9 @@ function getData() {
         //get the connection from the pool
         const con = yield connection_1.connection.getConnection();
         // get all the tables schemas
-        const resultQueryTables = yield con.query(get_tables_1.queryToGetTables);
+        const resultQueryTables = yield con.query(get_tables_1.queryToGetTables, [
+            exports.settings.database,
+        ]);
         //get all the tables names
         const tablesNames = resultQueryTables[0].map((table) => {
             return table.TABLE_NAME;
@@ -46,7 +48,7 @@ function getData() {
         //variable to store the tables
         const tables = [];
         //get all the tables descriptions
-        const descriptionFromAllTables = yield con.query(get_columns_descriptions_1.queryToGetColumnDescription);
+        const descriptionFromAllTables = yield con.query(get_columns_descriptions_1.queryToGetColumnDescription, [exports.settings.database]);
         try {
             // for each table get the columns descriptions
             for (var _d = true, tablesNames_1 = __asyncValues(tablesNames), tablesNames_1_1; tablesNames_1_1 = yield tablesNames_1.next(), _a = tablesNames_1_1.done, !_a; _d = true) {

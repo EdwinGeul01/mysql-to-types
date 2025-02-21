@@ -14,5 +14,5 @@ exports.queryToGetColumnDescription = `
     FROM 
         information_schema.columns
     WHERE 
-        TABLE_SCHEMA = 'Newdb1' 
+        TABLE_SCHEMA = ? 
 `;

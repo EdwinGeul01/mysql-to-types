@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-interface connectionSettings {
+export interface connectionSettings {
   filePath?: string;
   databaseType?: string;
   user?: string;

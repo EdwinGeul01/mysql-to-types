@@ -8,11 +8,14 @@ import { queryToGetTables } from "../querys/get-tables";
 import { queryToGetColumnDescription } from "../querys/get-columns-descriptions";
 import { connection } from "../connection/connection";
 import { createInterfaceFile } from "./create-interface-file";
-import { getConnectionSettings } from "../connection/connection-settings";
+import {
+  connectionSettings,
+  getConnectionSettings,
+} from "../connection/connection-settings";
 
 //read the connection settings from a json file
 
-export let settings: any;
+export let settings: connectionSettings;
 
 async function readSettings() {
   //validate if the file exists
@@ -27,7 +30,9 @@ async function getData() {
   const con = await connection.getConnection();
 
   // get all the tables schemas
-  const resultQueryTables: any = await con.query(queryToGetTables);
+  const resultQueryTables: any = await con.query(queryToGetTables, [
+    settings.database,
+  ]);
 
   //get all the tables names
   const tablesNames: string[] = resultQueryTables[0].map((table: any) => {
@@ -39,7 +44,8 @@ async function getData() {
 
   //get all the tables descriptions
   const descriptionFromAllTables: any = await con.query(
-    queryToGetColumnDescription
+    queryToGetColumnDescription,
+    [settings.database]
   );
 
   // for each table get the columns descriptions

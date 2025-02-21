@@ -4,5 +4,5 @@ exports.queryToGetTables = void 0;
 exports.queryToGetTables = `
     SELECT TABLE_NAME 
     FROM information_schema.tables 
-    WHERE TABLE_SCHEMA = 'Newdb1';
+    WHERE TABLE_SCHEMA = ?
 `;
