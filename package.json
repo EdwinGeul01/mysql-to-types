@@ -1,6 +1,6 @@
 {
   "name": "database-to-types",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "create a ts interfaces from a db schema",
   "main": "main.ts",
   "repository": {
