@@ -36,7 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getConnectionSettings = getConnectionSettings;
 const fs = __importStar(require("fs"));
 function getConnectionSettings() {
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     //read the connection settings from a json file
     let settingsFileRead;
     try {
@@ -53,6 +53,10 @@ function getConnectionSettings() {
             host: (_e = settingsFileRead === null || settingsFileRead === void 0 ? void 0 : settingsFileRead.host) !== null && _e !== void 0 ? _e : "localhost",
             port: parseInt((_f = settingsFileRead === null || settingsFileRead === void 0 ? void 0 : settingsFileRead.port) !== null && _f !== void 0 ? _f : "3306"),
             database: (_g = settingsFileRead === null || settingsFileRead === void 0 ? void 0 : settingsFileRead.database) !== null && _g !== void 0 ? _g : "test",
+            options: {
+                path: (_j = (_h = settingsFileRead === null || settingsFileRead === void 0 ? void 0 : settingsFileRead.options) === null || _h === void 0 ? void 0 : _h.path) !== null && _j !== void 0 ? _j : "./interfaces.d.ts",
+                prefix: (_l = (_k = settingsFileRead === null || settingsFileRead === void 0 ? void 0 : settingsFileRead.options) === null || _k === void 0 ? void 0 : _k.prefix) !== null && _l !== void 0 ? _l : "",
+            },
         };
         return connectionSettings;
     }

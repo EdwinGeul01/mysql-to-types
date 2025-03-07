@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx ./src/main.ts",
+    "start": "tsc && node ./bin/src/main.js",
     "build": "tsc",
     "db-to-ts": "node ./bin/src/main.js",
     "uri": "node ./bin/src/main.js -s mysql://username:password@host:port/database -f ./interfaces1212.ts -p asd_"
