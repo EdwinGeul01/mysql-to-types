@@ -32,3 +32,4 @@ run();
 //export functions
 export { createInterfaceFile } from "./create-interface-file";
 export { getTablesRegisters } from "./get-tables-registers";
+export { connectionSettings } from "../connection/connection-settings";

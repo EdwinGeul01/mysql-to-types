@@ -1,9 +1,9 @@
 {
   "name": "database-to-types",
-  "version": "1.0.17",
+  "version": "1.0.23",
   "description": "create a ts interfaces from a db schema",
-  "main": "./src/main.ts",
-  "types": "./src/main.d.ts",
+  "main": "./bin/src/main.js",
+  "types": "./bin/src/main.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/EdwinGeul01/mysql-to-types"
