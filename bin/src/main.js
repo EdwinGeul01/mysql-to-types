@@ -26,7 +26,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         yield readSettings();
         const tables = yield (0, get_tables_registers_1.getTablesRegisters)(settings);
-        yield (0, create_interface_file_1.createInterfaceFile)(tables);
+        yield (0, create_interface_file_1.createInterfaceFile)(tables, settings);
         console.log("file created, Done 🎉");
         process.exit(0);
     });

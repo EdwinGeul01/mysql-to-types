@@ -21,7 +21,7 @@ async function readSettings() {
 async function run() {
   await readSettings();
   const tables: table[] = await getTablesRegisters(settings);
-  await createInterfaceFile(tables);
+  await createInterfaceFile(tables, settings);
 
   console.log("file created, Done 🎉");
   process.exit(0);

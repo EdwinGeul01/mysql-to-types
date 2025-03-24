@@ -45,8 +45,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createInterfaceFile = createInterfaceFile;
 const fs = __importStar(require("fs"));
 const determine_type_1 = require("./determine-type");
-const main_1 = require("./main");
-function createInterfaceFile(tables) {
+function createInterfaceFile(tables, connexionSettings) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c, _d;
         let fstring = " // updated " + new Date().toString() + "\n\n";
@@ -56,7 +55,7 @@ function createInterfaceFile(tables) {
     }\n \n
   `;
         for (const t of tables) {
-            fstring += `export interface ${(_b = (_a = main_1.settings === null || main_1.settings === void 0 ? void 0 : main_1.settings.options) === null || _a === void 0 ? void 0 : _a.prefix) !== null && _b !== void 0 ? _b : ""}${t.name} {\n`;
+            fstring += `export interface ${(_b = (_a = connexionSettings === null || connexionSettings === void 0 ? void 0 : connexionSettings.options) === null || _a === void 0 ? void 0 : _a.prefix) !== null && _b !== void 0 ? _b : ""}${t.name} {\n`;
             for (const c of t.columns) {
                 const columnString = (0, determine_type_1.determineType)(c);
                 fstring += columnString;
@@ -64,7 +63,7 @@ function createInterfaceFile(tables) {
             fstring += "}\n\n";
         }
         //write the file
-        fs.writeFileSync((_d = (_c = main_1.settings.options) === null || _c === void 0 ? void 0 : _c.path) !== null && _d !== void 0 ? _d : "./interfaces.d.ts", fstring);
+        fs.writeFileSync((_d = (_c = connexionSettings.options) === null || _c === void 0 ? void 0 : _c.path) !== null && _d !== void 0 ? _d : "./interfaces.d.ts", fstring);
         fs.closeSync(0);
     });
 }
