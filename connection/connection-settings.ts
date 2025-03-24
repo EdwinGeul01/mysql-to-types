@@ -34,6 +34,10 @@ export function getConnectionSettings(): connectionSettings {
       host: settingsFileRead?.host ?? "localhost",
       port: parseInt(settingsFileRead?.port ?? "3306"),
       database: settingsFileRead?.database ?? "test",
+      options: {
+        path: settingsFileRead?.options?.path ?? "./interfaces.d.ts",
+        prefix: settingsFileRead?.options?.prefix ?? "",
+      },
     };
     return connectionSettings;
   }

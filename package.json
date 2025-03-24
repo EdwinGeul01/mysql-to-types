@@ -1,6 +1,6 @@
 {
   "name": "database-to-types",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "create a ts interfaces from a db schema",
   "main": "./src/main.ts",
   "types": "./src/main.d.ts",
@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx ./src/main.ts",
+    "start": "tsc && node ./bin/src/main.js",
     "build": "tsc",
     "db-to-ts": "node ./bin/src/main.js",
     "uri": "node ./bin/src/main.js -s mysql://username:password@host:port/database -f ./interfaces1212.ts -p asd_"
