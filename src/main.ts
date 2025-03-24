@@ -29,6 +29,6 @@ async function run() {
 
 run();
 
-export function test(num1: number, num2: number) {
-  return num1 + num2;
-}
+//export functions
+export { createInterfaceFile } from "./create-interface-file";
+export { getTablesRegisters } from "./get-tables-registers";

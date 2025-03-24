@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.test = test;
 require("dotenv/config");
 const connection_settings_1 = require("../connection/connection-settings");
 const create_interface_file_1 = require("./create-interface-file");
@@ -32,3 +33,6 @@ function run() {
     });
 }
 run();
+function test(num1, num2) {
+    return num1 + num2;
+}
