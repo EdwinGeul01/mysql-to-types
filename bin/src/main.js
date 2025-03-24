@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.test = test;
+exports.getTablesRegisters = exports.createInterfaceFile = void 0;
 require("dotenv/config");
 const connection_settings_1 = require("../connection/connection-settings");
 const create_interface_file_1 = require("./create-interface-file");
@@ -33,6 +33,8 @@ function run() {
     });
 }
 run();
-function test(num1, num2) {
-    return num1 + num2;
-}
+//export functions
+var create_interface_file_2 = require("./create-interface-file");
+Object.defineProperty(exports, "createInterfaceFile", { enumerable: true, get: function () { return create_interface_file_2.createInterfaceFile; } });
+var get_tables_registers_2 = require("./get-tables-registers");
+Object.defineProperty(exports, "getTablesRegisters", { enumerable: true, get: function () { return get_tables_registers_2.getTablesRegisters; } });
