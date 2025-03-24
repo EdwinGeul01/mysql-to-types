@@ -9,85 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __asyncValues = (this && this.__asyncValues) || function (o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settings = void 0;
 require("dotenv/config");
-const get_tables_1 = require("../querys/get-tables");
-const get_columns_descriptions_1 = require("../querys/get-columns-descriptions");
-const connection_1 = require("../connection/connection");
-const create_interface_file_1 = require("./create-interface-file");
 const connection_settings_1 = require("../connection/connection-settings");
+const create_interface_file_1 = require("./create-interface-file");
+const get_tables_registers_1 = require("./get-tables-registers");
+//read the connection settings from a json file
+let settings;
 function readSettings() {
     return __awaiter(this, void 0, void 0, function* () {
         //validate if the file exists
-        exports.settings = yield (0, connection_settings_1.getConnectionSettings)();
-        // JSON.parse(await fs.readFile("conection-sql-ts.json", "utf-8"));
+        settings = yield (0, connection_settings_1.getConnectionSettings)();
     });
 }
-function getData() {
+function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, e_1, _b, _c;
         yield readSettings();
-        //get the connection from the pool
-        const con = yield connection_1.connection.getConnection();
-        // get all the tables schemas
-        const resultQueryTables = yield con.query(get_tables_1.queryToGetTables, [
-            exports.settings.database,
-        ]);
-        //get all the tables names
-        const tablesNames = resultQueryTables[0].map((table) => {
-            return table.TABLE_NAME;
-        });
-        //variable to store the tables
-        const tables = [];
-        //get all the tables descriptions
-        const descriptionFromAllTables = yield con.query(get_columns_descriptions_1.queryToGetColumnDescription, [exports.settings.database]);
-        try {
-            // for each table get the columns descriptions
-            for (var _d = true, tablesNames_1 = __asyncValues(tablesNames), tablesNames_1_1; tablesNames_1_1 = yield tablesNames_1.next(), _a = tablesNames_1_1.done, !_a; _d = true) {
-                _c = tablesNames_1_1.value;
-                _d = false;
-                const t = _c;
-                const descriptionFromTable = descriptionFromAllTables[0].filter((table) => table["TABLE_NAME"] == t);
-                //if the table has columns
-                if (descriptionFromTable.length > 0) {
-                    const columns = descriptionFromTable.map((column) => {
-                        return {
-                            name: column.Column,
-                            type: column.Type,
-                            comment: column.Comment,
-                            default: column["DefaultValue"],
-                            extra: column.Extras,
-                            key: column.Key,
-                            nullable: column["Nullable"],
-                        };
-                    });
-                    tables.push({
-                        name: t,
-                        description: "",
-                        columns,
-                    });
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (!_d && !_a && (_b = tablesNames_1.return)) yield _b.call(tablesNames_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
+        const tables = yield (0, get_tables_registers_1.getTablesRegisters)(settings);
         yield (0, create_interface_file_1.createInterfaceFile)(tables);
-        yield con.release();
         console.log("file created, Done 🎉");
         process.exit(0);
     });
 }
-getData();
+run();
