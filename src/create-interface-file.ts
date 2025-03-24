@@ -1,9 +1,12 @@
 import * as fs from "fs";
 import { table } from "../_interface/table.interface";
 import { determineType } from "./determine-type";
-import { settings } from "./main";
+import { connectionSettings } from "../connection/connection-settings";
 
-export async function createInterfaceFile(tables: table[]) {
+export async function createInterfaceFile(
+  tables: table[],
+  connexionSettings: connectionSettings
+) {
   let fstring = " // updated " + new Date().toString() + "\n\n";
 
   //create the json_type interface
@@ -13,7 +16,7 @@ export async function createInterfaceFile(tables: table[]) {
   `;
 
   for (const t of tables) {
-    fstring += `export interface ${settings?.options?.prefix ?? ""}${
+    fstring += `export interface ${connexionSettings?.options?.prefix ?? ""}${
       t.name
     } {\n`;
 
@@ -25,7 +28,10 @@ export async function createInterfaceFile(tables: table[]) {
   }
 
   //write the file
-  fs.writeFileSync(settings.options?.path ?? "./interfaces.d.ts", fstring);
+  fs.writeFileSync(
+    connexionSettings.options?.path ?? "./interfaces.d.ts",
+    fstring
+  );
 
   fs.closeSync(0);
 }
